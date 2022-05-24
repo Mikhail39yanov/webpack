@@ -1,0 +1,23 @@
+const { resolve } = require('path')
+const webpack = require('webpack')
+const webpackConfig = require('../webpack.config')
+const nodemon = require('nodemon')
+
+const compiler = webpack(webpackConfig)
+
+compiler.run(err => {
+  if (err) console.log('Compilation failed:', err)
+
+  compiler.watch({}, (err) => {
+    if (err) console.log(`compilation failed:`, err)
+    console.log('Compilation was successfully')
+  })
+
+  nodemon({
+    script: resolve(__dirname, '../dist/server/server.js'),
+    watch: [
+      resolve(__dirname, '../dist/server'),
+      resolve(__dirname, '../dist/client')
+    ]
+  })
+})

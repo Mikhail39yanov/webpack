@@ -2,6 +2,7 @@
   "name": "webpack-sborka",
   "description": "webpack sborka 2022",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "build": "webpack --mode=production --env prod",
     "dev": "webpack serve --mode=development"

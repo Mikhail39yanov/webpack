@@ -1,7 +1,20 @@
-const { resolve } = require('path')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+import { resolve, dirname } from 'path'
+import { fileURLToPath } from 'url'
+import HtmlWebpackPlugin from 'html-webpack-plugin'
 
-module.exports = (env) => ({
+const __dirname = dirname(fileURLToPath(import.meta.url))
+
+const createHTMLfile = new HtmlWebpackPlugin({
+  title: 'React',
+  template: resolve(__dirname, 'src/index.html'),
+  // chunks: ['app'],
+  // minify: {
+  //   collapseWhitespace: true
+  // },
+  // hash: true,
+})
+
+const config = (env) => ({
   entry: resolve(__dirname, 'src/index.jsx'),
   output: {
     path: resolve(__dirname, 'dist'),
@@ -19,15 +32,7 @@ module.exports = (env) => ({
     ]
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      title: 'React',
-      template: resolve(__dirname, 'src/index.html'),
-      // chunks: ['app'],
-      // minify: {
-      //   collapseWhitespace: true
-      // },
-      // hash: true,
-    }),
+    createHTMLfile,
   ],
   devServer: {
     hot: true,
@@ -44,3 +49,4 @@ module.exports = (env) => ({
   devtool: env.prod ? 'eval' : false
 })
 
+export default config

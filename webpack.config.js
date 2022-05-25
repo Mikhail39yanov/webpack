@@ -1,11 +1,17 @@
 const { resolve } = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
-module.exports = (env) => ({
-  entry: resolve(__dirname, 'src/index.jsx'),
+let mode = 'development'
+if (process.env.NODE_ENV === 'production') mode = 'production'
+
+module.exports = {
+  mode,
+  context: resolve(__dirname, 'src'),
+  entry: './index.jsx',
   output: {
     path: resolve(__dirname, 'dist'),
     filename: 'bundle.js',
+    clean: true,
   },
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx', '.json', '...']
@@ -15,13 +21,35 @@ module.exports = (env) => ({
       {
         test: /\.[tj]sx$/,
         use: ['ts-loader']
+      },
+      {
+        test: /\.s[ac]ss$/i,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: {
+                mode: 'local',
+                localIdentName: '[name]__[local]--[hash:base64:5]',
+              },
+              sourceMap: true,
+            }
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true,
+            },
+          }
+        ]
       }
     ]
   },
   plugins: [
     new HtmlWebpackPlugin({
       title: 'React',
-      template: resolve(__dirname, 'src/index.html'),
+      template: './index.html',
       // chunks: ['app'],
       // minify: {
       //   collapseWhitespace: true
@@ -41,6 +69,6 @@ module.exports = (env) => ({
       },
     }
   },
-  devtool: env.prod ? 'eval' : false
-})
+  devtool: mode ? 'eval' : false
+}
 

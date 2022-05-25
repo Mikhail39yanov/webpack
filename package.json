@@ -3,8 +3,8 @@
   "description": "webpack sborka 2022",
   "main": "index.js",
   "scripts": {
-    "build": "webpack --mode=production --env prod",
-    "dev": "webpack serve --mode=development"
+    "build": "webpack --mode=production",
+    "dev": "webpack serve"
   },
   "author": "Yanov Mikahil <yanovmikhailco@ya.ru>",
   "license": "ISC",
@@ -13,7 +13,17 @@
     "react-dom": "^18.1.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.18.2",
+    "@babel/preset-env": "^7.18.2",
+    "@types/jest": "^27.5.1",
+    "babel-jest": "^28.1.0",
+    "css-loader": "^6.7.1",
     "html-webpack-plugin": "^5.5.0",
+    "jest": "^28.1.0",
+    "sass": "^1.52.1",
+    "sass-loader": "^13.0.0",
+    "style-loader": "^3.3.1",
+    "ts-jest": "^28.0.3",
     "ts-loader": "^9.3.0",
     "typescript": "^4.6.4",
     "webpack": "^5.72.1",

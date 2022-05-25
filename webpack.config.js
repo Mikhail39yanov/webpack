@@ -1,25 +1,41 @@
 const { resolve } = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
-let mode = 'development'
-if (process.env.NODE_ENV === 'production') mode = 'production'
+const NODE_ENV = process.env.NODE_ENV
+const IS_DEV = NODE_ENV === 'development'
+const IS_PROD = NODE_ENV === 'production'
+console.log(NODE_ENV)
+
+function setupDevtool() {
+  if (IS_DEV) return 'source-map'
+  if (IS_PROD) return false
+}
+
+const filename = ext => IS_DEV ? `[name].${ext}` : `[name].[hash].${ext}`
 
 module.exports = {
-  mode,
+  mode: NODE_ENV ? NODE_ENV : 'development',
   context: resolve(__dirname, 'src'),
-  entry: './index.jsx',
+  entry: {
+    main: './index.jsx',
+  },
   output: {
     path: resolve(__dirname, 'dist'),
-    filename: 'bundle.js',
+    filename: filename('js'),
     clean: true,
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.ts', '.tsx', '.json', '...']
+    extensions: ['.js', '.jsx', '.ts', '.tsx', '.json', '...'],
+    alias: {
+      '@': resolve(__dirname, 'src'),
+      '@example': resolve(__dirname, 'src/example'),
+    }
   },
   module: {
     rules: [
       {
-        test: /\.[tj]sx$/,
+        test: /\.[tj]sx?$/,
+        exclude: /node_modules/,
         use: ['ts-loader']
       },
       {
@@ -57,10 +73,11 @@ module.exports = {
       // hash: true,
     }),
   ],
+  // optimization: {},
   devServer: {
-    hot: true,
+    hot: IS_DEV,
     port: 3000,
-    compress: true,
+    // compress: true,
     // historyApiFallback: true,
     open: {
       app: {
@@ -69,6 +86,5 @@ module.exports = {
       },
     }
   },
-  devtool: mode ? 'eval' : false
+  devtool: setupDevtool(),
 }
-

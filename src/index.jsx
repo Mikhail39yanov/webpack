@@ -2,6 +2,8 @@ import React from 'react'
 import { createRoot } from 'react-dom/client'
 import { Header } from './Header'
 
-const container = document.getElementById('app-root')
-const root = createRoot(container)
-root.render(<Header />)
+window.addEventListener('load', () => {
+  const container = document.getElementById('app-root')
+  const root = createRoot(container)
+  root.render(<Header />)
+})

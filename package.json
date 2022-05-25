@@ -1,10 +1,11 @@
 {
   "name": "webpack-sborka",
   "description": "webpack sborka 2022",
-  "main": "index.js",
+  "private": true,
   "scripts": {
-    "build": "webpack --mode=production",
-    "dev": "webpack serve"
+    "build": "cross-env NODE_ENV=production webpack",
+    "dev": "cross-env NODE_ENV=development webpack",
+    "start": "cross-env NODE_ENV=development webpack serve"
   },
   "author": "Yanov Mikahil <yanovmikhailco@ya.ru>",
   "license": "ISC",
@@ -17,6 +18,7 @@
     "@babel/preset-env": "^7.18.2",
     "@types/jest": "^27.5.1",
     "babel-jest": "^28.1.0",
+    "cross-env": "^7.0.3",
     "css-loader": "^6.7.1",
     "html-webpack-plugin": "^5.5.0",
     "jest": "^28.1.0",

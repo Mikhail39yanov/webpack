@@ -1,9 +1,9 @@
 import React from 'react'
-import { createRoot } from 'react-dom/client'
+import ReactDom from 'react-dom'
+import './normalize.scss'
 import { Header } from './Header'
 
 window.addEventListener('load', () => {
   const container = document.getElementById('app-root')
-  const root = createRoot(container)
-  root.render(<Header />)
+  ReactDom.render(<Header />, container)
 })

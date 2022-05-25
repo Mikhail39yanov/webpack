@@ -39,12 +39,13 @@ const config = (env) => ({
     port: 3000,
     compress: true,
     // historyApiFallback: true,
-    open: {
-      app: {
-        name: 'chrome',
-        // name: 'google-chrome',
-      },
-    }
+    open: true,
+    // open: {
+    //   app: {
+    //     // name: 'chrome', // 
+    //     // name: 'google-chrome',
+    //   },
+    // }
   },
   devtool: env.prod ? 'eval' : false
 })

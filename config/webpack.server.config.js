@@ -11,7 +11,7 @@ module.exports = {
   output: {
     path: resolve(__dirname, '../dist/server'),
     filename: 'server.js',
-    // clean: true,
+    clean: true,
   },
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx', '.json', '...']
@@ -32,5 +32,5 @@ module.exports = {
   externals: [nodeExternals()],
   optimization: {
     minimize: false,
-  },
+  }
 }

@@ -11,12 +11,6 @@ function setupDevtool() {
   if (IS_PROD) return false
 }
 module.exports = {
-  resolve: {
-    extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
-    alias: {
-      'react-dom': IS_DEV ? '@hot-loader/react-dom' : 'react-dom',
-    }
-  },
   mode: NODE_ENV ? NODE_ENV : 'development',
   entry: [
     path.resolve(__dirname, '../src/client/index.jsx'),
@@ -26,6 +20,12 @@ module.exports = {
     path: path.resolve(__dirname, '../dist/client'),
     filename: 'client.js',
     publicPath: '/static/',
+  },
+  resolve: {
+    extensions: ['.js', '.jsx', '.ts', '.tsx', '.json', '...'],
+    alias: {
+      'react-dom': IS_DEV ? '@hot-loader/react-dom' : 'react-dom',
+    }
   },
   module: {
     rules: [{
@@ -47,16 +47,16 @@ module.exports = {
             }
           }
         },
-        'less-loader',
+        'sass-loader'
       ]
     }
     ]
   },
-  devtool: setupDevtool(),
   plugins: IS_DEV
     ? [
       new CleanWebpackPlugin(),
       new HotModuleReplacementPlugin()
     ]
     : [],
+  devtool: setupDevtool(),
 }

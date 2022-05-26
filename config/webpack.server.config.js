@@ -1,16 +1,17 @@
 const { resolve } = require('path')
 const nodeExternals = require('webpack-node-externals')
 
-let mode = 'development'
-if (process.env.NODE_ENV === 'production') mode = 'production'
+const NODE_ENV = process.env.NODE_ENV
+const IS_DEV = NODE_ENV === 'development'
+const IS_PROD = NODE_ENV === 'production'
 
 module.exports = {
-  mode,
+  mode: NODE_ENV ? NODE_ENV : 'development',
   entry: resolve(__dirname, '../src/server/server.js'),
   output: {
     path: resolve(__dirname, '../dist/server'),
     filename: 'server.js',
-    clean: true,
+    // clean: true,
   },
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx', '.json', '...']
@@ -18,9 +19,10 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.[tj]sx$/,
-        use: ['ts-loader']
-      }
+        test: /\.[tj]sx?$/,
+        exclude: /node_modules/,
+        use: ['ts-loader'],
+      },
     ]
   },
   // target: 'node',
@@ -30,5 +32,5 @@ module.exports = {
   externals: [nodeExternals()],
   optimization: {
     minimize: false,
-  }
+  },
 }

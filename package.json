@@ -6,7 +6,8 @@
     "build": "cross-env NODE_ENV=production webpack",
     "dev": "cross-env NODE_ENV=development webpack",
     "start": "cross-env NODE_ENV=development SERVE=true webpack serve",
-    "clean": "rd /s /q dist"
+    "clean:wind": "rd /s /q dist",
+    "clean:mac": "rm -rf dist"
   },
   "author": "Mikahil <yanovmikhailco@ya.ru>",
   "license": "ISC",
@@ -16,6 +17,8 @@
     "@babel/preset-react": "^7.17.12",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.7",
     "@types/jest": "^27.5.1",
+    "@types/react": "^18.0.12",
+    "@types/react-dom": "^18.0.5",
     "babel-jest": "^28.1.0",
     "cross-env": "^7.0.3",
     "css-loader": "^6.7.1",

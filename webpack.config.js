@@ -36,7 +36,7 @@ module.exports = {
   mode: NODE_ENV ? NODE_ENV : 'development',
   context: resolve(__dirname, 'src'),
   entry: {
-    main: './index.jsx',
+    main: './index.tsx',
   },
   output: {
     path: resolve(__dirname, 'dist'),
@@ -45,7 +45,7 @@ module.exports = {
     clean: true,
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.ts', '.tsx', '.json', '...'],
+    extensions: ['.js', '.jsx', '.ts', '.tsx', '.json', '.css', '.scss', '...'],
     alias: {
       '@': resolve(__dirname, 'src'),
       '@example': resolve(__dirname, 'src/example'),
@@ -66,17 +66,18 @@ module.exports = {
             loader: 'css-loader',
             options: {
               modules: {
-                mode: 'local',
-                localIdentName: '[name]__[local]--[hash:base64:5]',
+                // mode: 'local',
+                //   localIdentName: '[name]__[local]--[hash:base64:5]',
+                localIdentName: '[local]',
               },
-              sourceMap: true,
+              // sourceMap: true,
             }
           },
           {
             loader: 'sass-loader',
-            options: {
-              sourceMap: true,
-            },
+            // options: {
+            //   sourceMap: true,
+            // },
           }
         ]
       },
@@ -103,7 +104,10 @@ module.exports = {
         name: 'chrome',
         // name: 'google-chrome',
       },
-    }
+    },
+    client: {
+      logging: 'none',
+    },
   },
   devtool: setupDevtool(),
 }

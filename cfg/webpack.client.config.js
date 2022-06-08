@@ -10,13 +10,10 @@ function setupDevtool() {
   if (IS_DEV) return 'eval'
   if (IS_PROD) return false
 }
+
+// const filename = ext => IS_DEV ? `[name].${ext}` : `[name].[hash].${ext}`
+
 module.exports = {
-  resolve: {
-    extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
-    alias: {
-      'react-dom': IS_DEV ? '@hot-loader/react-dom' : 'react-dom',
-    }
-  },
   mode: NODE_ENV ? NODE_ENV : 'development',
   entry: [
     path.resolve(__dirname, '../src/client/index.jsx'),
@@ -27,27 +24,36 @@ module.exports = {
     filename: 'client.js',
     publicPath: '/static/',
   },
+  resolve: {
+    extensions: ['.js', '.jsx', '.ts', '.tsx', '.json', '.css', '.scss', '...'],
+    alias: {
+      'react-dom': IS_DEV ? '@hot-loader/react-dom' : 'react-dom',
+      '@': path.resolve(__dirname, 'src'),
+      '@example': path.resolve(__dirname, 'src/example'),
+    }
+  },
   module: {
     rules: [{
       test: /\.[tj]sx?$/,
+      // exclude: /node_modules/,
       use: ['ts-loader']
     },
     {
       // test: /\.css$/,
-      test: /\.less$/,
+      test: /\.s[ac]ss$/i,
       use: [
         'style-loader',
         {
           loader: 'css-loader',
           options: {
             modules: {
-              mode: 'local',
-              localIdentName: '[name]__[local]--[hash:base64:5]',
-
+              // mode: 'local',
+              // localIdentName: '[name]__[local]--[hash:base64:5]',
+              localIdentName: '[local]',
             }
           }
         },
-        'less-loader',
+        'sass-loader',
       ]
     }
     ]

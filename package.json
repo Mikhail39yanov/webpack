@@ -1,6 +1,5 @@
 {
   "name": "webpack-sborka",
-  "version": "1.0.0",
   "description": "webpack 4 react 17 sborka 2022 ssr+hmr",
   "private": true,
   "scripts": {
@@ -10,25 +9,21 @@
     "clean:wind": "rd /s /q dist",
     "clean:mac": "rm -rf dist"
   },
-  "author": "Yanov Mikahil <yanovmikhailco@ya.ru>",
+  "author": "Mikahil <yanovmikhailco@ya.ru>",
   "license": "ISC",
-  "dependencies": {
-    "express": "^4.17.3",
-    "nodemon": "^2.0.15",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1"
-  },
   "devDependencies": {
     "@hot-loader/react-dom": "^17.0.1",
-    "@types/jest": "^27.4.1",
+    "@types/jest": "^27.5.2",
+    "@types/react": "^17.0.45",
+    "@types/react-dom": "^18.0.5",
     "clean-webpack-plugin": "^4.0.0",
     "cross-env": "^7.0.3",
     "css-loader": "^3.4.2",
     "html-webpack-plugin": "^4.5.2",
     "jest": "^27.5.1",
-    "less": "^3.13.1",
-    "less-loader": "^5.0.0",
     "react-hot-loader": "^4.13.0",
+    "sass": "^1.52.2",
+    "sass-loader": "^10.2.1",
     "style-loader": "^1.1.3",
     "ts-jest": "^27.1.4",
     "ts-loader": "^6.2.1",
@@ -39,5 +34,11 @@
     "webpack-dev-server": "^3.10.3",
     "webpack-hot-middleware": "^2.25.0",
     "webpack-node-externals": "^3.0.0"
+  },
+  "dependencies": {
+    "express": "^4.17.3",
+    "nodemon": "^2.0.15",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
   }
 }

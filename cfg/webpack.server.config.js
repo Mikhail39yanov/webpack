@@ -1,7 +1,9 @@
 const path = require('path')
 const nodeExternals = require('webpack-node-externals')
-const NODE_ENV = process.env.NODE_ENV
 
+const NODE_ENV = process.env.NODE_ENV
+// const IS_DEV = NODE_ENV === 'development'
+// const IS_PROD = NODE_ENV === 'production'
 
 module.exports = {
   target: 'node',
@@ -12,31 +14,31 @@ module.exports = {
     filename: 'server.js'
   },
   resolve: {
-    extensions: [
-      '.js', '.jsx', '.ts', '.tsx', '.json'
-    ]
+    extensions: ['.js', '.jsx', '.ts', '.tsx', '.json', '.css', '.scss', '...'],
   },
   externals: [nodeExternals()],
   module: {
     rules: [{
       test: /\.[tj]sx?$/,
-      use: ['ts-loader']
+      // exclude: /node_modules/,
+      use: ['ts-loader'],
     },
     {
       // test: /\.css$/,
-      test: /\.less$/,
+      test: /\.s[ac]ss$/i,
       use: [
         {
           loader: 'css-loader',
           options: {
             modules: {
-              mode: 'local',
-              localIdentName: '[name]__[local]--[hash:base64:5]',
+              // mode: 'local',
+              // localIdentName: '[name]__[local]--[hash:base64:5]',
+              localIdentName: '[local]',
             },
             onlyLocals: true
           }
         },
-        'less-loader',
+        'sass-loader',
       ]
     }]
   },

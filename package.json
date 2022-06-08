@@ -12,6 +12,8 @@
   "author": "Mikahil <yanovmikhailco@ya.ru>",
   "license": "ISC",
   "devDependencies": {
+    "@babel/core": "^7.18.2",
+    "@babel/preset-env": "^7.18.2",
     "@hot-loader/react-dom": "^17.0.1",
     "@types/jest": "^27.5.2",
     "@types/react": "^17.0.45",
